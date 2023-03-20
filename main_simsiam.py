@@ -239,8 +239,8 @@ def main_worker(gpu, ngpus_per_node, args):
     ]
 
     train_dataset = ImageNet100(
-        traindir,
-        simsiam.loader.TwoCropsTransform(transforms.Compose(augmentation)))
+        traindir, split="train",
+        transform=simsiam.loader.TwoCropsTransform(transforms.Compose(augmentation)))
 
     if args.distributed:
         train_sampler = torch.utils.data.distributed.DistributedSampler(train_dataset)
