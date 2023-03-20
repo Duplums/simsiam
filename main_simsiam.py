@@ -227,12 +227,12 @@ def main_worker(gpu, ngpus_per_node, args):
 
     # MoCo v2's aug: similar to SimCLR https://arxiv.org/abs/2002.05709
     augmentation = [
-        transforms.RandomResizedCrop(224, scale=(0.2, 1.)),
+        transforms.RandomResizedCrop(224, scale=(0.08, 1.)),
         transforms.RandomApply([
-            transforms.ColorJitter(0.4, 0.4, 0.4, 0.1)  # not strengthened
+            transforms.ColorJitter(0.8, 0.8, 0.8, 0.2)  # not strengthened
         ], p=0.8),
         transforms.RandomGrayscale(p=0.2),
-        transforms.RandomApply([simsiam.loader.GaussianBlur([.1, 2.])], p=0.5),
+        #transforms.RandomApply([simsiam.loader.GaussianBlur([.1, 2.])], p=0.5),
         transforms.RandomHorizontalFlip(),
         transforms.ToTensor(),
         normalize
