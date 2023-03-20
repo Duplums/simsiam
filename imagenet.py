@@ -1,7 +1,7 @@
 import os
 from torchvision.datasets import ImageNet
 
-class ImageNet100Dataset(ImageNet):
+class ImageNet100(ImageNet):
 
     def _extract_classes(self, all_classes=None):
         """
