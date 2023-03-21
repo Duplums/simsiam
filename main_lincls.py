@@ -34,6 +34,7 @@ model_names = sorted(name for name in models.__dict__
 parser = argparse.ArgumentParser(description='PyTorch ImageNet Training')
 parser.add_argument('data', metavar='DIR',
                     help='path to dataset')
+parser.add_argument("--save_dir", type=str)
 parser.add_argument('-a', '--arch', metavar='ARCH', default='resnet50',
                     choices=model_names,
                     help='model architecture: ' +
@@ -314,8 +315,9 @@ def main_worker(gpu, ngpus_per_node, args):
                 'arch': args.arch,
                 'state_dict': model.state_dict(),
                 'best_acc1': best_acc1,
-                'optimizer' : optimizer.state_dict(),
-            }, is_best)
+                'optimizer' : optimizer.state_dict()},
+                is_best,
+                filename=os.path.join(args.save_dir, 'checkpoint.pth.tar'))
             if epoch == args.start_epoch:
                 sanity_check(model.state_dict(), args.pretrained)
 
